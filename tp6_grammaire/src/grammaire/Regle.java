@@ -14,9 +14,16 @@ public class Regle {
 		this.depart=X;
 		this.arrivee=new Symbole(a);
 	}
-	
-	/*les methodes utiles seront implémentées plus tard quand je saurais un peu mieux ce dont j'ai besoin*/
-	
-	
-	
+	/*
+	 * getter utile 
+	 */ 
+	public Variable getVar(){
+		return this.depart;
+	}
+	public boolean donneChar(char a) {
+		return this.arrivee.donneChar(a);
+	}
+	public boolean donneVar(Variable y, Variable z) {
+		return this.arrivee.donneVar(y,z);
+	}
 }

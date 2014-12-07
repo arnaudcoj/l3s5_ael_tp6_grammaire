@@ -11,5 +11,10 @@ public class Symbole extends Derivation{
 	public char getSymbole(){
 		return this.symbole;
 	}
-	
+	public boolean donneChar(char c){
+		return this.symbole==c;
+	}
+	public boolean donneVar(Variable y, Variable z){
+		return false;
+	}
 }

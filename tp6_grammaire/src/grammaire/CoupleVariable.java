@@ -16,4 +16,12 @@ public class CoupleVariable extends Derivation{
 	public Variable getVari2(){
 		return this.vari2;
 	}
+	
+	public boolean donneChar(char c){
+		return false;
+	}
+	
+	public boolean donneVar(Variable y, Variable z){
+		return this.vari1==y&&this.vari2==z;
+	}
 }

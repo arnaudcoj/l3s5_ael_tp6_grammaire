@@ -1,12 +1,19 @@
 package grammaire;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class ChomskyGrammar {
 	/*Attributs*/
 	private Variable axiome ;
 	private Set<Regle> regles;
 	
+	
+	/**
+	 * la grammaire est vide il faut rajouter l'axiome et l'ensemble de règles avec les 3 fonctions qui suivent.
+	 */
 	public ChomskyGrammar() {
-		//todo
+		this.regles = new HashSet<Regle>();
 	}
 	
 	
@@ -31,12 +38,45 @@ public class ChomskyGrammar {
 		regles.add(new Regle(X,a));
 	}
 	
-	public Cellule existeRegleDonnant(char a){
-		return new Cellule();
+	public void ajouteRegleDonnantChar(char a, Cellule c){
+		for (Regle regle : this.regles) {
+			if(regle.donneChar(a))
+				c.addVar(regle.getVar());
+		}
+	}
+	
+	public void ajouteRegleDonnantCouple(Variable Y, Variable Z,Cellule c){
+		for (Regle regle : this.regles) {
+			if(regle.donneVar(Y,Z))
+				c.addVar(regle.getVar());
+		};
 	}
 	
 	
 	public boolean accept(String mot) {
-		return true;
+		int longueur = mot.length();
+		Cellule[][] monTableau= new Cellule[longueur][longueur];
+		for(int i=0;i<mot.length();i++){
+			/*monTableau[0][i]=new Cellule();*/
+			/*si il existe une regle X qui donne mot[i] mettre X dans la cellule (1,i)*/
+			this.ajouteRegleDonnantChar(mot.charAt(i), monTableau[0][i]);
+		}
+		for(int l=0;l<longueur;l++){ /* là c est le moment de vomir en lisant l'algo*/
+			for(int i=0;i<longueur-l+1;i++){
+				for(int m= 0;m<l-1;m++){
+					/*Si il existe un X qui donne YZ avec Y dans la cellule(m,i) et Z dans la cellule (l-m,i+m)
+					 * alors ajouter X à la cellule(l,i)*/
+					Set<Variable> lesY = monTableau[m][i].getVariable() ;
+					Set<Variable> lesZ = monTableau[l-m][i+m].getVariable() ;
+					for (Variable Y : lesY) {
+						for (Variable Z : lesZ) {
+							this.ajouteRegleDonnantCouple(Y,Z,monTableau[l][i]) ;
+						}
+						
+					}
+				}
+			}
+		}
+		return monTableau[longueur-1][1].getVariable().contains(this.axiome);
 	}
 }
