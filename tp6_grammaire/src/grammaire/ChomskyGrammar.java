@@ -32,10 +32,10 @@ public class ChomskyGrammar {
 	 * @param Z
 	 */
 	public void addRule(Variable X,Variable Y,Variable Z){
-		regles.add(new Regle(X,Y,Z));
+		this.regles.add(new Regle(X,Y,Z));
 	}
 	public void addRule(Variable X, char a){
-		regles.add(new Regle(X,a));
+		this.regles.add(new Regle(X,a));
 	}
 	
 	public void ajouteRegleDonnantChar(char a, Cellule c){
@@ -56,19 +56,23 @@ public class ChomskyGrammar {
 	public boolean accept(String mot) {
 		int longueur = mot.length();
 		Cellule[][] monTableau= new Cellule[longueur][longueur];
-		for(int i=0;i<mot.length();i++)
-			this.ajouteRegleDonnantChar(mot.charAt(i), monTableau[0][i]);
-		for(int l=0;l<longueur;l++){ 
-			for(int i=0;i<longueur-l+1;i++){
-				for(int m= 0;m<l-1;m++){
-					Set<Variable> lesY = monTableau[m][i].getVariable() ;
-					Set<Variable> lesZ = monTableau[l-m][i+m].getVariable() ;
+		for(int a = 0; a < longueur; a++)
+			for(int b = 0; b < longueur; b++)
+				monTableau[a][b] = new Cellule();
+		for(int i=1;i<=longueur;i++)
+			this.ajouteRegleDonnantChar(mot.charAt(i-1), monTableau[0][i-1]);
+		for(int l=2;l<=longueur;l++){ 
+			for(int i=1;i<=longueur-l+1;i++){
+				for(int m= 1;m<=l-1;m++){
+					Set<Variable> lesY = monTableau[m-1][i-1].getVariable() ;
+					Set<Variable> lesZ = monTableau[l-m-1][i+m-1].getVariable() ;
 					for (Variable Y : lesY) 
 						for (Variable Z : lesZ)
-							this.ajouteRegleDonnantCouple(Y,Z,monTableau[l][i]) ;
+							this.ajouteRegleDonnantCouple(Y,Z,monTableau[l-1][i-1]) ;
 				}
 			}
 		}
-		return monTableau[longueur-1][1].getVariable().contains(this.axiome);
+		return monTableau[longueur-1][0].getVariable().contains(this.axiome);
 	}
+	
 }
