@@ -1,20 +1,55 @@
+/**
+ * @author Matthieu Caron
+ * @author Arnaud Cojez
+ */
 package grammaire;
 
-public class Symbole extends Derivation{
-	/*Oui je sais pas si c'est possible de faire étendre la class char*/
+/**
+ * Classe représentant une dérivation.
+ */
+public class Symbole implements Derivation {
+
+	/* Attributs */
 	private char symbole;
-	
-	public Symbole(char a){
-		this.symbole=a;
+
+	/* Méthodes */
+
+	/**
+	 * Constructeur de la classe symbole.
+	 * 
+	 * @param car
+	 *            le symbole sous forme de caractère
+	 */
+	public Symbole(char car) {
+		this.symbole = car;
 	}
-	
-	public char getSymbole(){
+
+	/**
+	 * Retourne le caractère représentant le symbole.
+	 * 
+	 * @return le caractère représentant le symbole
+	 */
+	public char getSymbole() {
 		return this.symbole;
 	}
-	public boolean donneChar(char c){
-		return this.symbole==c;
+
+	/**
+	 * Retourne true si le symbole donne le caractère c.
+	 * 
+	 * @return true si le symbole donne le caractère c
+	 */
+	public boolean donneChar(char c) {
+		return this.symbole == c;
 	}
-	public boolean donneVar(Variable y, Variable z){
+
+	/**
+	 * Retourne true si le symbole donne la variable y.
+	 * 
+	 * @return true si le symbole donne la variable y
+	 * 
+	 *         Note : Retournera toujours false pour la classe Symbole.
+	 */
+	public boolean donneVar(Variable y, Variable z) {
 		return false;
 	}
 }

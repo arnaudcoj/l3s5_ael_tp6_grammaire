@@ -1,7 +1,26 @@
+/**
+ * @author Matthieu Caron
+ * @author Arnaud Cojez 
+ */
+
 package grammaire;
 
-public abstract class Derivation {
-	public abstract boolean donneChar(char c) ;
+/**
+ * Interface représentant une dérivation.
+ */
+public interface Derivation {
 
-	public abstract boolean donneVar(Variable y, Variable z);
+	/**
+	 * Retourne true si le symbole donne le caractère c.
+	 * 
+	 * @return true si le symbole donne le caractère c
+	 */
+	public boolean donneChar(char c);
+
+	/**
+	 * Retourne true si le symbole donne la variable y.
+	 * 
+	 * @return true si le symbole donne la variable y
+	 */
+	public boolean donneVar(Variable y, Variable z);
 }

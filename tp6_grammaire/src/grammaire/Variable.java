@@ -1,20 +1,36 @@
+/**
+ * @author Matthieu Caron
+ * @author Arnaud Cojez
+ */
+
 package grammaire;
 
+/**
+ * 
+ * Classe définissant une variable.
+ */
 public class Variable {
+	
+	/* Attributs */
 	private String id ;
 	
+	/* Méthodes */
+	
+	/**
+	 * Constructeur de la classe Variable.
+	 * @param id le nom de la variable
+	 */
 	public Variable(String id){
 		this.id=id;
 	}
 	
+	/**
+	 * Retourne l'id de la variable.
+	 * @return l'id de la Variable
+	 */
 	public String getID(){
 		return this.id ;
 	}
-
-	/*
-	 * Va nous etre utile pour la hashmap...
-	 */
-	
 	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
