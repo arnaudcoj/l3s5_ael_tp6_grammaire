@@ -56,24 +56,16 @@ public class ChomskyGrammar {
 	public boolean accept(String mot) {
 		int longueur = mot.length();
 		Cellule[][] monTableau= new Cellule[longueur][longueur];
-		for(int i=0;i<mot.length();i++){
-			/*monTableau[0][i]=new Cellule();*/
-			/*si il existe une regle X qui donne mot[i] mettre X dans la cellule (1,i)*/
+		for(int i=0;i<mot.length();i++)
 			this.ajouteRegleDonnantChar(mot.charAt(i), monTableau[0][i]);
-		}
-		for(int l=0;l<longueur;l++){ /* là c est le moment de vomir en lisant l'algo*/
+		for(int l=0;l<longueur;l++){ 
 			for(int i=0;i<longueur-l+1;i++){
 				for(int m= 0;m<l-1;m++){
-					/*Si il existe un X qui donne YZ avec Y dans la cellule(m,i) et Z dans la cellule (l-m,i+m)
-					 * alors ajouter X à la cellule(l,i)*/
 					Set<Variable> lesY = monTableau[m][i].getVariable() ;
 					Set<Variable> lesZ = monTableau[l-m][i+m].getVariable() ;
-					for (Variable Y : lesY) {
-						for (Variable Z : lesZ) {
+					for (Variable Y : lesY) 
+						for (Variable Z : lesZ)
 							this.ajouteRegleDonnantCouple(Y,Z,monTableau[l][i]) ;
-						}
-						
-					}
 				}
 			}
 		}
